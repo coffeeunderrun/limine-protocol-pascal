@@ -155,16 +155,16 @@ type
 
 { ** Executable Command Line ************************************************ }
 type
-  PLimineExecutableCommandLineResponse = ^TLimineExecutableCommandLineResponse;
-  TLimineExecutableCommandLineResponse = record
+  PLimineExecutableCmdLineResponse = ^TLimineExecutableCmdLineResponse;
+  TLimineExecutableCmdLineResponse = record
     Revision: QWord;
     CommandLine: PChar;
   end;
 
-  TLimineExecutableCommandLineRequest = record
+  TLimineExecutableCmdLineRequest = record
     Id: array [0..3] of QWord;
     Revision: QWord;
-    Response: PLimineExecutableCommandLineResponse;
+    Response: PLimineExecutableCmdLineResponse;
   end;
 
 { ** Executable File ******************************************************** }
@@ -254,18 +254,18 @@ type
     Response: PLimineFramebufferResponse;
   end;
 
-{ ** Higher Half Direct Map ************************************************* }
+{ ** HHDM - Higher Half Direct Map ****************************************** }
 type
-  PLimineHigherHalfDirectMapResponse = ^TLimineHigherHalfDirectMapResponse;
-  TLimineHigherHalfDirectMapResponse = record
+  PLimineHhdmResponse = ^TLimineHhdmResponse;
+  TLimineHhdmResponse = record
     Revision: QWord;
     Offset: QWord;
   end;
 
-  TLimineHigherHalfDirectMapRequest = record
+  TLimineHhdmRequest = record
     Id: array [0..3] of QWord;
     Revision: QWord;
-    Response: PLimineHigherHalfDirectMapResponse;
+    Response: PLimineHhdmResponse;
   end;
 
 { ** Memory Map ************************************************************* }

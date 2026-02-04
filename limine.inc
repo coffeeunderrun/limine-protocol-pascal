@@ -99,13 +99,13 @@ const
 {$endif LIMINE_REQUEST_EXECUTABLE_ADDRESS}
 
 { ** Executable Command Line ************************************************ }
-{$ifdef LIMINE_REQUEST_EXECUTABLE_COMMAND_LINE}
-  LimineRequestExecutableCommandLine: TLimineExecutableAddressRequest = (
+{$ifdef LIMINE_REQUEST_EXECUTABLE_CMDLINE}
+  LimineRequestExecutableCmdLine: TLimineExecutableCmdLineRequest = (
     Id: (LIMINE_COMMON_MAGIC, QWord($4B161536E598651E), QWord($B390AD4A2F1F303A));
     Revision: 0;
     Response: nil;
-  ); export name '_limine_request_executable_command_line';
-{$endif LIMINE_REQUEST_EXECUTABLE_COMMAND_LINE}
+  ); export name '_limine_request_executable_cmdline';
+{$endif LIMINE_REQUEST_EXECUTABLE_CMDLINE}
 
 { ** Executable File ******************************************************** }
 {$ifdef LIMINE_REQUEST_EXECUTABLE_FILE}
@@ -134,14 +134,14 @@ const
   ); export name '_limine_request_framebuffer';
 {$endif LIMINE_REQUEST_FRAMEBUFFER}
 
-{ ** Higher Half Direct Map ************************************************* }
-{$ifdef LIMINE_REQUEST_HIGHER_HALF_DIRECT_MAP}
-  LimineRequestHigherHalfDirectMap: TLimineHigherHalfDirectMapRequest = (
+{ ** HHDM - Higher Half Direct Map ****************************************** }
+{$ifdef LIMINE_REQUEST_HHDM}
+  LimineRequestHhdm: TLimineHhdmRequest = (
     Id: (LIMINE_COMMON_MAGIC, QWord($48DCF1CB8AD2B852), QWord($63984E959A98244B));
     Revision: 0;
     Response: nil;
-  ); export name '_limine_request_higher_half_direct_map';
-{$endif LIMINE_REQUEST_HIGHER_HALF_DIRECT_MAP}
+  ); export name '_limine_request_hhdm';
+{$endif LIMINE_REQUEST_HHDM}
 
 { ** Memory Map ************************************************************* }
 {$ifdef LIMINE_REQUEST_MEMORY_MAP}
