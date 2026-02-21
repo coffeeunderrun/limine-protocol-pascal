@@ -115,7 +115,7 @@ type
   PLimineEfiSystemTableResponse = ^TLimineEfiSystemTableResponse;
   TLimineEfiSystemTableResponse = record
     Revision: QWord;
-    Address: QWord;
+    Address: Pointer;
   end;
 
   TLimineEfiSystemTableRequest = record
@@ -278,7 +278,7 @@ const
   LIMINE_MEMMAP_BOOTLOADER_RECLAIMABLE = 5;
   LIMINE_MEMMAP_EXECUTABLE_AND_MODULES = 6;
   LIMINE_MEMMAP_FRAMEBUFFER            = 7;
-  LIMINE_MEMMAP_ACPI_TABLES            = 8;
+  LIMINE_MEMMAP_RESERVED_MAPPED        = 8;
 
 type
   PLimineMemoryMapEntry = ^TLimineMemoryMapEntry;
@@ -455,8 +455,8 @@ type
   PLimineSmbiosResponse = ^TLimineSmbiosResponse;
   TLimineSmbiosResponse = record
     Revision: QWord;
-    Entry32: QWord;
-    Entry64: QWord;
+    Entry32: Pointer;
+    Entry64: Pointer;
   end;
 
   TLimineSmbiosRequest = record
