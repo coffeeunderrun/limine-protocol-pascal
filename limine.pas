@@ -5,7 +5,7 @@ interface
 const
   LIMINE_MEDIA_TYPE_GENERIC = 0;
   LIMINE_MEDIA_TYPE_OPTICAL = 1;
-  LIMINE_MEDIA_TYPE_TFTP = 2;
+  LIMINE_MEDIA_TYPE_TFTP    = 2;
 
 type
   TLimineUuid = record
@@ -184,9 +184,9 @@ type
 { ** Firmware Type ********************************************************** }
 const
   LIMINE_FIRMWARE_TYPE_X86BIOS = 0;
-  LIMINE_FIRMWARE_TYPE_EFI32 = 1;
-  LIMINE_FIRMWARE_TYPE_EFI64 = 2;
-  LIMINE_FIRMWARE_TYPE_SBI = 3;
+  LIMINE_FIRMWARE_TYPE_EFI32   = 1;
+  LIMINE_FIRMWARE_TYPE_EFI64   = 2;
+  LIMINE_FIRMWARE_TYPE_SBI     = 3;
 
 type
   PLimineFirmwareTypeResponse = ^TLimineFirmwareTypeResponse;
@@ -270,15 +270,15 @@ type
 
 { ** Memory Map ************************************************************* }
 const
-  LIMINE_MEMMAP_USABLE = 0;
-  LIMINE_MEMMAP_RESERVED = 1;
-  LIMINE_MEMMAP_ACPI_RECLAIMABLE = 2;
-  LIMINE_MEMMAP_ACPI_NVS = 3;
-  LIMINE_MEMMAP_BAD_MEMORY = 4;
+  LIMINE_MEMMAP_USABLE                 = 0;
+  LIMINE_MEMMAP_RESERVED               = 1;
+  LIMINE_MEMMAP_ACPI_RECLAIMABLE       = 2;
+  LIMINE_MEMMAP_ACPI_NVS               = 3;
+  LIMINE_MEMMAP_BAD_MEMORY             = 4;
   LIMINE_MEMMAP_BOOTLOADER_RECLAIMABLE = 5;
   LIMINE_MEMMAP_EXECUTABLE_AND_MODULES = 6;
-  LIMINE_MEMMAP_FRAMEBUFFER = 7;
-  LIMINE_MEMMAP_ACPI_TABLES = 8;
+  LIMINE_MEMMAP_FRAMEBUFFER            = 7;
+  LIMINE_MEMMAP_ACPI_TABLES            = 8;
 
 type
   PLimineMemoryMapEntry = ^TLimineMemoryMapEntry;
@@ -304,7 +304,7 @@ type
 
 { ** Module ***************************************************************** }
 const
-  LIMINE_INTERNAL_MODULE_REQUIRED = 1;
+  LIMINE_INTERNAL_MODULE_REQUIRED   = 1;
   LIMINE_INTERNAL_MODULE_COMPRESSED = 2;
 
 type
@@ -480,6 +480,8 @@ type
   end;
 
 function BaseRevisionSupported: Boolean; inline;
+function LoadedBaseRevisionValid: Boolean; inline;
+function LoadedBaseRevision: QWord; inline;
 
 implementation
 
@@ -489,6 +491,16 @@ var
 function BaseRevisionSupported: Boolean;
 begin
   BaseRevisionSupported := BaseRevision[2] = 0;
+end;
+
+function LoadedBaseRevisionValid: Boolean;
+begin
+  LoadedBaseRevisionValid := BaseRevision[1] <> $6A7B384944536BDC;
+end;
+
+function LoadedBaseRevision: QWord;
+begin
+  LoadedBaseRevision := BaseRevision[1];
 end;
 
 end.

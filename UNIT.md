@@ -2,8 +2,9 @@
 
 The [limine.pas](kernel/src/limine.pas) file contains the types and constants described in the [Limine Protocol](https://codeberg.org/Limine/limine-protocol/src/branch/trunk/PROTOCOL.md).
 
-The [limine.inc](kernel/src/limine.inc) file contains the requests which are enabled using define directives.
+The [limine.inc](kernel/src/limine.inc) file contains the requests which are enabled using define directives. [Why?](#why-is-limineinc-necessary)
 
+How do I add the requests to a specific section?
 > FreePascal does not provide a way to specify section names. Exported symbols use the `_limine_request_` prefix allowing the linker script to target any that are enabled.
 
 Example linker script section:
@@ -13,8 +14,6 @@ Example linker script section:
     KEEP(*(.data.*_limine_request_*))
 } :limine_requests
 ```
-
----
 
 ## Enabling C-style macros
 
@@ -72,6 +71,7 @@ Set paging mode:
 
 ```pascal
 {$macro on}
+{$define LIMINE_PAGING_MODE_REVISION := 1}
 {$define LIMINE_PAGING_MODE := LIMINE_PAGING_MODE_X86_64_DEFAULT}
 {$define LIMINE_PAGING_MODE_MIN := LIMINE_PAGING_MODE_X86_64_4LVL}
 {$define LIMINE_PAGING_MODE_MAX := LIMINE_PAGING_MODE_X86_64_5LVL}
@@ -89,8 +89,6 @@ Set stack size:
 {$define LIMINE_REQUEST_STACK_SIZE}
 {$I limine.inc}
 ```
-
----
 
 ## Request specific features
 
@@ -119,8 +117,6 @@ Define the request macros prior to including `limine.inc` to request features:
 {$define LIMINE_REQUEST_SMBIOS}
 {$define LIMINE_REQUEST_STACK_SIZE}
 ```
-
----
 
 ## Accessing the requests
 
@@ -178,3 +174,45 @@ Example definition for Framebuffer request:
 var
   Framebuffer: TLimineFramebufferRequest; external name '_limine_request_framebuffer';
 ```
+
+## Why is limine.inc necessary?
+FreePascal does not support parameterized C-style macros.
+
+Assigning values to records at compile-time is also limited. Static initialization of records requires literal values.
+
+This is possible:
+
+```pascal
+const
+  LimineRequestBaseRevision: TLimineFramebufferRequest = (
+    Id: (
+      QWord($C7B1DD30DF4C8B88),
+      QWord($0A82E883A194F07B),
+      QWord($9D5827DCD881DD75),
+      QWord($A3148604F6FAB11B)
+    );
+    Revision: 0;
+    Response: nil;
+  ); export name '_limine_request_base_revision';
+```
+
+While this is not:
+
+```pascal
+const
+  LimineRequestBaseRevision: TLimineFramebufferRequest = (
+    Id: LIMINE_FRAMEBUFFER_REQUEST_ID;
+    Revision: 0;
+    Response: nil;
+  ); export name '_limine_request_base_revision';
+```
+
+FreePascal does support basic C-style macros for assigning values.
+
+```pascal
+{$macro on}
+{$define LIMINE_BASE_REVISION := 4}
+{$macro off}
+```
+
+Using these macros with `limine.inc` was the most convenient way I found to make this work. It may change if I find a better alternative.
