@@ -2,7 +2,7 @@
 
 The [limine.pas](kernel/src/limine.pas) file contains the types and constants described in the [Limine Protocol](https://codeberg.org/Limine/limine-protocol/src/branch/trunk/PROTOCOL.md).
 
-The [limine.inc](kernel/src/limine.inc) file contains the requests which are enabled using define directives. [Why?](#why-is-limineinc-necessary)
+The [limine.inc](kernel/src/limine.inc) file contains the requests which are enabled using define directives. [Why?](#why-is-limine-include-necessary)
 
 How do I add the requests to a specific section?
 > FreePascal does not provide a way to specify section names. Exported symbols use the `_limine_request_` prefix allowing the linker script to target any that are enabled.
@@ -27,7 +27,7 @@ To set specific Limine request values you will need to enable C-style macros:
 
 ### Examples:
 
-Set a specific base revision (default base revision is currently 4):
+Set a specific base revision:
 
 ```pascal
 {$macro on}
@@ -175,7 +175,7 @@ var
   Framebuffer: TLimineFramebufferRequest; external name '_limine_request_framebuffer';
 ```
 
-## Why is limine.inc necessary?
+## Why is limine include necessary?
 FreePascal does not support parameterized C-style macros.
 
 Assigning values to records at compile-time is also limited. Static initialization of records requires literal values.
@@ -184,7 +184,7 @@ This is possible:
 
 ```pascal
 const
-  LimineRequestBaseRevision: TLimineFramebufferRequest = (
+  FramebufferRequest: TLimineFramebufferRequest = (
     Id: (
       QWord($C7B1DD30DF4C8B88),
       QWord($0A82E883A194F07B),
@@ -193,18 +193,18 @@ const
     );
     Revision: 0;
     Response: nil;
-  ); export name '_limine_request_base_revision';
+  ); export name '_limine_request_framebuffer';
 ```
 
 While this is not:
 
 ```pascal
 const
-  LimineRequestBaseRevision: TLimineFramebufferRequest = (
+  FramebufferRequest: TLimineFramebufferRequest = (
     Id: LIMINE_FRAMEBUFFER_REQUEST_ID;
     Revision: 0;
     Response: nil;
-  ); export name '_limine_request_base_revision';
+  ); export name '_limine_request_framebuffer';
 ```
 
 FreePascal does support basic C-style macros for assigning values.
