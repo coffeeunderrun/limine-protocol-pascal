@@ -182,6 +182,18 @@ const
   ); export name '_limine_request_hhdm';
 {$endif LIMINE_REQUEST_HHDM}
 
+{ ** Keep IOMMU ************************************************************* }
+{$ifdef LIMINE_REQUEST_KEEP_IOMMU}
+  {$ifndef LIMINE_KEEP_IOMMU_REVISION}
+    {$define LIMINE_KEEP_IOMMU_REVISION := 0}
+  {$endif LIMINE_KEEP_IOMMU_REVISION}
+  LimineRequestKeepIommu: TLimineKeepIommuRequest = (
+    Id: (LIMINE_COMMON_MAGIC, QWord($8EBAABE51F490179), QWord($2AA86A59FFB4AB0F));
+    Revision: LIMINE_KEEP_IOMMU_REVISION;
+    Response: nil;
+  ); export name '_limine_request_keep_iommu';
+{$endif LIMINE_REQUEST_KEEP_IOMMU}
+
 { ** Memory Map ************************************************************* }
 {$ifdef LIMINE_REQUEST_MEMORY_MAP}
   {$ifndef LIMINE_MEMORY_MAP_REVISION}

@@ -268,6 +268,19 @@ type
     Response: PLimineHhdmResponse;
   end;
 
+{ ** Keep IOMMU ************************************************************* }
+type
+  PLimineKeepIommuResponse = ^TLimineKeepIommuResponse;
+  TLimineKeepIommuResponse = record
+    Revision: QWord;
+  end;
+
+  TLimineKeepIommuRequest = record
+    Id: array [0..3] of QWord;
+    Revision: QWord;
+    Response: PLimineKeepIommuResponse;
+  end;
+
 { ** Memory Map ************************************************************* }
 const
   LIMINE_MEMMAP_USABLE                 = 0;
