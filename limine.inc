@@ -158,6 +158,18 @@ const
   ); export name '_limine_request_firmware_type';
 {$endif LIMINE_REQUEST_FIRMWARE_TYPE}
 
+{ ** Flanterm FB Init Params ************************************************ }
+{$ifdef LIMINE_REQUEST_FLANTERM_FB_INIT_PARAMS}
+  {$ifndef LIMINE_FLANTERM_FB_INIT_PARAMS_REVISION}
+    {$define LIMINE_FLANTERM_FB_INIT_PARAMS_REVISION := 0}
+  {$endif LIMINE_FLANTERM_FB_INIT_PARAMS_REVISION}
+  LimineRequestFlantermFbInitParams: TLimineFlantermFbInitParamsRequest = (
+    Id: (LIMINE_COMMON_MAGIC, QWord($3259399FE7C5F126), QWord($0E01C1C8C5DB9D1A9));
+    Revision: LIMINE_FLANTERM_FB_INIT_PARAMS_REVISION;
+    Response: nil;
+  ); export name '_limine_request_flanterm_fb_init_params';
+{$endif LIMINE_REQUEST_FLANTERM_FB_INIT_PARAMS}
+
 { ** Framebuffer Request **************************************************** }
 {$ifdef LIMINE_REQUEST_FRAMEBUFFER}
   {$ifndef LIMINE_FRAMEBUFFER_REVISION}

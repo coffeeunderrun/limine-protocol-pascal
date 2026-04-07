@@ -203,6 +203,50 @@ type
     Response: PLimineFirmwareTypeResponse;
   end;
 
+{ ** Flanterm FB Init Params ************************************************ }
+const
+  LIMINE_FLANTERM_FB_ROTATE_0   = 0;
+  LIMINE_FLANTERM_FB_ROTATE_90  = 1;
+  LIMINE_FLANTERM_FB_ROTATE_180 = 2;
+  LIMINE_FLANTERM_FB_ROTATE_270 = 3;
+
+type
+  PLimineFlantermFbInitParams = ^TLimineFlantermFbInitParams;
+  TLimineFlantermFbInitParams = record
+    Canvas: PDWord;
+    CanvasSize: QWord;
+    AnsiColours: array [0..7] of DWord;
+    AnsiBrightColours: array [0..7] of DWord;
+    DefaultBg: DWord;
+    DefaultFg: DWord;
+    DefaultBgBright: DWord;
+    DefaultFgBright: DWord;
+    Font: Pointer;
+    FontWidth: QWord;
+    FontHeight: QWord;
+    FontSpacing: QWord;
+    FontScaleX: QWord;
+    FontScaleY: QWord;
+    Margin: QWord;
+    Rotation: QWord;
+  end;
+
+  PLimineFlantermFbInitParamsArray = ^TLimineFlantermFbInitParamsArray;
+  TLimineFlantermFbInitParamsArray = array of TLimineFlantermFbInitParams;
+
+  PLimineFlantermFbInitParamsResponse = ^TLimineFlantermFbInitParamsResponse;
+  TLimineFlantermFbInitParamsResponse = record
+    Revision: QWord;
+    EntryCount: QWord;
+    Entries: PLimineFlantermFbInitParamsArray;
+  end;
+
+  TLimineFlantermFbInitParamsRequest = record
+    Id: array [0..3] of QWord;
+    Revision: QWord;
+    Response: PLimineFlantermFbInitParamsResponse;
+  end;
+
 { ** Framebuffer Request **************************************************** }
 type
   PLimineVideoMode = ^TLimineVideoMode;

@@ -106,6 +106,7 @@ Define the request macros prior to including `limine.inc` to request features:
 {$define LIMINE_REQUEST_EXECUTABLE_CMDLINE}
 {$define LIMINE_REQUEST_EXECUTABLE_FILE}
 {$define LIMINE_REQUEST_FIRMWARE_TYPE}
+{$define LIMINE_REQUEST_FLANTERM_FB_INIT_PARAMS}
 {$define LIMINE_REQUEST_FRAMEBUFFER}
 {$define LIMINE_REQUEST_HHDM}
 {$define LIMINE_REQUEST_KEEP_IOMMU}
@@ -134,6 +135,7 @@ Available external names for requests:
 - `_limine_request_executable_cmdline`
 - `_limine_request_executable_file`
 - `_limine_request_firmware_type`
+- `_limine_request_flanterm_fb_init_params`
 - `_limine_request_framebuffer`
 - `_limine_request_hhdm`
 - `_limine_request_keep_iommu`
@@ -159,6 +161,7 @@ Corresponding types for requests:
 - `TLimineExecutableCmdLineRequest`
 - `TLimineExecutableFileRequest`
 - `TLimineFirmwareTypeRequest`
+- `TLimineFlantermFbInitParamsRequest`
 - `TLimineFramebufferRequest`
 - `TLimineHhdmRequest`
 - `TLimineKeepIommuRequest`
