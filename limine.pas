@@ -420,6 +420,9 @@ type
 {$elseif defined(CPURISCV64)}
     Hartid: QWord;
     Reserved: QWord;
+{$elseif defined(CPULOONGARCH64)}
+    PhysId: QWord;
+    Reserved: QWord;
 {$endif}
     GotoAddress: TLimineGotoAddress;
     ExtraArgument: QWord;
@@ -440,6 +443,9 @@ type
 {$elseif defined(CPURISCV64)}
     Flags: QWord;
     BspHartId: QWord;
+{$elseif defined(CPULOONGARCH64)}
+    Flags: QWord;
+    BspPhysId: QWord;
 {$endif}
     CpuCount: QWord;
     Cpus: PLimineMultiprocessorInfoArray;
