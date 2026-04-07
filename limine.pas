@@ -32,7 +32,9 @@ type
     GptPartUuid: TLimineUuid;
     PartUuid: TLimineUuid;
   end;
-  ALimineFile = array of TLimineFile;
+
+  PLimineFileArray = ^TLimineFileArray;
+  TLimineFileArray = array of TLimineFile;
 
 { ** Bootloader Info ******************************************************** }
 type
@@ -217,7 +219,9 @@ type
     BlueMaskSize: Byte;
     BlueMaskShift: Byte;
   end;
-  ALimineVideoMode = array of TLimineVideoMode;
+
+  PLimineVideoModeArray = ^TLimineVideoModeArray;
+  TLimineVideoModeArray = array of TLimineVideoMode;
 
   PLimineFramebuffer = ^TLimineFramebuffer;
   TLimineFramebuffer = record
@@ -237,15 +241,17 @@ type
     EdidSize: QWord;
     Edid: Pointer;
     ModeCount: QWord;
-    Modes: ^ALimineVideoMode;
+    Modes: PLimineVideoModeArray;
   end;
-  ALimineFramebuffer = array of TLimineFramebuffer;
+
+  PLimineFramebufferArray = ^TLimineFramebufferArray;
+  TLimineFramebufferArray = array of TLimineFramebuffer;
 
   PLimineFramebufferResponse = ^TLimineFramebufferResponse;
   TLimineFramebufferResponse = record
     Revision: QWord;
     FramebufferCount: QWord;
-    Framebuffers: ^ALimineFramebuffer;
+    Framebuffers: PLimineFramebufferArray;
   end;
 
   TLimineFramebufferRequest = record
@@ -300,13 +306,15 @@ type
     Length: QWord;
     EntryType: QWord;
   end;
-  ALimineMemoryMapEntry = array of TLimineMemoryMapEntry;
+
+  PLimineMemoryMapEntryArray = ^TLimineMemoryMapEntryArray;
+  TLimineMemoryMapEntryArray = array of TLimineMemoryMapEntry;
 
   PLimineMemoryMapResponse = ^TLimineMemoryMapResponse;
   TLimineMemoryMapResponse = record
     Revision: QWord;
     EntryCount: QWord;
-    Entries: ^ALimineMemoryMapEntry;
+    Entries: PLimineMemoryMapEntryArray;
   end;
 
   TLimineMemoryMapRequest = record
@@ -322,18 +330,20 @@ const
 
 type
   PLimineInternalModule = ^TLimineInternalModule;
-  ALimineInternalModule = array of PLimineInternalModule;
   TLimineInternalModule = record
     Path: PChar;
     Str: PChar;
     Flags: QWord;
   end;
 
+  PLimineInternalModuleArray = ^TLimineInternalModuleArray;
+  TLimineInternalModuleArray = array of PLimineInternalModule;
+
   PLimineModuleResponse = ^TLimineModuleResponse;
   TLimineModuleResponse = record
     Revision: QWord;
     ModuleCount: QWord;
-    Modules: ^ALimineFile;
+    Modules: PLimineFileArray;
   end;
 
   TLimineModuleRequest = record
@@ -342,7 +352,7 @@ type
     Response: PLimineModuleResponse;
     { Request revision 1 }
     InternalModuleCount: QWord;
-    InternalModules: ^ALimineInternalModule;
+    InternalModules: PLimineInternalModuleArray;
   end;
 
 { ** Multiprocessor ********************************************************* }
@@ -370,7 +380,9 @@ type
     GotoAddress: TLimineGotoAddress;
     ExtraArgument: QWord;
   end;
-  ALimineMultiprocessorInfo = array of TLimineMultiprocessorInfo;
+
+  PLimineMultiprocessorInfoArray = ^TLimineMultiprocessorInfoArray;
+  TLimineMultiprocessorInfoArray = array of TLimineMultiprocessorInfo;
 
   PLimineMultiprocessorResponse = ^TLimineMultiprocessorResponse;
   TLimineMultiprocessorResponse = record
@@ -386,7 +398,7 @@ type
     BspHartId: QWord;
 {$endif}
     CpuCount: QWord;
-    Cpus: ^ALimineMultiprocessorInfo;
+    Cpus: PLimineMultiprocessorInfoArray;
   end;
 
   TLimineMultiprocessorRequest = record
