@@ -221,4 +221,19 @@ FreePascal does support basic C-style macros for assigning values.
 {$macro off}
 ```
 
-Using these macros with `limine.inc` was the most convenient way I found to make this work. It may change if I find a better alternative.
+The C-style macros allow this to work:
+
+```pascal
+const
+{$macro on}
+  FramebufferRequest: TLimineFramebufferRequest = (
+    Id: LIMINE_FRAMEBUFFER_REQUEST_ID;
+    Revision: 0;
+    Response: nil;
+  ); export name '_limine_request_framebuffer';
+{$macro off}
+```
+
+It still requires `limine.inc` to be included, but the requests can be explicitly defined.
+
+> Using these macros with `limine.inc` was the most convenient way I found to make this work. It may change if I find a better alternative.
